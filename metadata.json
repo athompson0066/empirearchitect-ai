@@ -1,0 +1,5 @@
+{
+  "name": "EmpireArchitect AI",
+  "description": "A comprehensive AI publishing assistant powered by Ollama Pro (minimax-m2.7) for content strategy, audience analysis, and trend discovery.",
+  "requestFramePermissions": []
+}
