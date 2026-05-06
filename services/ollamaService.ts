@@ -131,11 +131,16 @@ Output ONLY a JSON array with 12 objects.`;
       max_tokens: 12000,
     }));
     const text = response.choices[0]?.message?.content || "";
+    console.log("[EmpireArchitect] Raw API response:", text.substring(0, 500));
     const parsed = robustParseJson(text);
+    console.log("[EmpireArchitect] Parsed result:", parsed);
+    if (!Array.isArray(parsed)) {
+      console.warn("[EmpireArchitect] Parse failed, returning empty array");
+    }
     return Array.isArray(parsed) ? parsed : [];
   } catch (error: any) {
     if (error?.status === 429) throw new Error("QUOTA_EXCEEDED");
-    console.error("Error generating content ideas:", error);
+    console.error("[EmpireArchitect] Error generating content ideas:", error);
     return [];
   }
 };
