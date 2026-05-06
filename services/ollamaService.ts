@@ -102,11 +102,11 @@ export const generateContentIdeas = async (
   contentType: ContentType
 ): Promise<ContentIdea[]> => {
   let systemInstruction = "You are a world-class digital publishing expert. Output ONLY a raw JSON array matching the schema. No markdown, no explanation.";
-  let prompt = `Build a high-revenue content strategy for the keyword: "${keyword}". Generate 12 high-value, unique ideas for the format: "${contentType}". Focus on items that can be sold or used to build a massive audience. Return a JSON array with objects containing: title, subtitle, description, targetAudience, painPointSolved, monetizationAngle.`;
+  let prompt = `Build a high-revenue content strategy for the keyword: "${keyword}". Generate 8 high-value, unique ideas for the format: "${contentType}". Focus on items that can be sold or used to build a massive audience. Return a JSON array with objects containing: title, subtitle, description, targetAudience, painPointSolved, monetizationAngle.`;
 
   if (contentType === ContentType.AD_SNIPPETS) {
-    systemInstruction = "You are a direct-response copywriting legend like Eugene Schwartz. Every output must be punchy, psychological, and perfectly formatted. Output ONLY a JSON array with 12 objects.";
-    prompt = `Create 12 PERSUASIVE AD SNIPPETS for the keyword: "${keyword}".
+    systemInstruction = "You are a direct-response copywriting legend like Eugene Schwartz. Every output must be punchy, psychological, and perfectly formatted. Output ONLY a JSON array with 8 objects.";
+    prompt = `Create 8 PERSUASIVE AD SNIPPETS for the keyword: "${keyword}".
 CONSTRAINTS FOR EACH SNIPPET:
 1. TITLE: Exactly 4 words. Punchy, curiosity-driven, and bold.
 2. SUBTITLE: A compelling hook that promises a specific transformation.
@@ -118,8 +118,8 @@ Output ONLY a JSON array with 12 objects.`;
   }
 
   if (contentType === ContentType.TOP_WEBSITES) {
-    systemInstruction = "You are a web research expert. For the keyword: " + keyword + ", identify 12 high-authority websites and resources. Output ONLY a JSON array.";
-    prompt = `Find the top 12 best websites, tools, and high-authority resources for: "${keyword}". Return a JSON array with objects containing: title, description, targetAudience, painPointSolved, monetizationAngle (as "Resource Reference"), url.`;
+    systemInstruction = "You are a web research expert. For the keyword: " + keyword + ", identify 8 high-authority websites and resources. Output ONLY a JSON array.";
+    prompt = `Find the top 8 best websites, tools, and high-authority resources for: "${keyword}". Return a JSON array with objects containing: title, description, targetAudience, painPointSolved, monetizationAngle (as "Resource Reference"), url.`;
   }
 
   try {
@@ -128,7 +128,7 @@ Output ONLY a JSON array with 12 objects.`;
       model: MODEL,
       messages: buildMessages(systemInstruction, prompt),
       temperature: 0.85,
-      max_tokens: 4000,
+      max_tokens: 12000,
     }));
     const text = response.choices[0]?.message?.content || "";
     const parsed = robustParseJson(text);
